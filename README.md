@@ -7,38 +7,33 @@ consist of a little amount of simple classes that represent specific entity of O
 Class Map represent an object that contains all the entities parsed from osm file. It also have special methods for computing some math
 ```python
 def get_bounds() -> tuple[float]
-"""Return the coordinates of sides from current map frame in this order. (All values are float)
-(left , right , top , bottom)
-"""
+    # Return the coordinates of sides from current map frame in this order. (All values are float)
+    # (left , right , top , bottom)
 ```
 ```python
 def get_size() -> float
-"""Return the area of current map frame
-"""
+    # Return the area of current map frame
 ```
 ```python
 def get_center() -> tuple[float]
-"""Return coordinates of center point of current map frame (latitude , longtitute)
-"""
+    # Return coordinates of center point of current map frame (latitude , longtitute)
 ```
 ```python
 def get_ways() -> osmparser.Way
-"""Return all map ways
-"""
+    # Return all map ways
 
 def get_routes() -> osmparser.Route
-"""Return all map routes
-"""
+    # Return all map routes
 
 def get_relations() -> osmparser.Relation
-"""Return all map relations
-"""
+    # Return all map relations
 
 ```
 
 
 # Relation [here](https://wiki.openstreetmap.org/wiki/Types_of_relation)
-
+Relation base class represent serialization of <relation> xml tag from OpenStreetMap xml export.
 
 
 # Way [here](https://wiki.openstreetmap.org/wiki/Way)
+Way can be closed or can be opened

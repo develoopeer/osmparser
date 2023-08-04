@@ -1,7 +1,9 @@
 # <center>OsmParser 🗿</center>
 ## About
-Osm parser is simple OpenStreetMap xml output parser. It's guided by official [OpenStreatMap](https://wiki.openstreetmap.org/wiki/) documentation and
-consist of a little amount of simple classes that represent specific entity of OpenStreetMap
+![schema_image](schema.png "Schema")
+
+Osm parser is simple (under 500 lines) OpenStreetMap xml output parser. It's guided by official [OpenStreatMap](https://wiki.openstreetmap.org/wiki/) 
+documentation and consist of a little amount of simple classes that represent specific entity of OpenStreetMap
 
 # Map
 Class Map represent an object that contains all the entities parsed from osm file. It also have special methods for computing some math

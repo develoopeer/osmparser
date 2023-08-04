@@ -12,13 +12,14 @@ def pairwise(iterable):
 
 
 class Map:
-    def __init__(self , root) -> None:
-        self.root = root
+    def __init__(self , map_file) -> None:
+        self.tree = ET.parse(map_file)
+        self.root = self.tree.getroot()
     
     def get_relations(self) -> None:
         _relations = self.root.findall(".//relation")
         result = []
-        for _relation in _relation:
+        for _relation in _relations:
             result.append(Relation(_relation))
 
         return result
@@ -57,17 +58,24 @@ class Map:
         return len(self.get_ways())
 
     def get_ways(self):
-        return self.root.findall('.//way')
+        ways = []
+        for way in self.root.findall('.//way'):
+            ways.append(MemberWay(way))
+            print('-----way added-----')
 
+        return ways
     def get_routes(self):
         return self.root.findall(".//tag[@v='route']...")
 
     def get_relation(self , relation_id):
         return Relation(self.root.findall(".//relation[@id='{}']".format(relation_id))[0])
 
+    def get_node(self , node_id):
+        return self.root.find(f".//node[@id='{node_id}']")
 
 class MemberWay():
     def __init__(self , member) -> None:
+        # self._root = root
         self.member_struct = member
         self._serial_nodes , self._serial_tags = self._serialize()
 
@@ -76,7 +84,7 @@ class MemberWay():
         tags  = {}
         for tag in self.member_struct:
             if tag.tag == 'nd':
-                nodes.append(tag)
+                nodes.append(tag.attrib['ref'])
             elif tag.tag == 'tag':
                 tags[tag.attrib['k']] = tag.attrib['v']
         return nodes , tags
@@ -138,3 +146,9 @@ class Relation:
     @property
     def type(self) -> str:
         return self.tags['type']
+
+
+
+
+new_map = Map('map.osm')
+print(new_map.ways_cound)
